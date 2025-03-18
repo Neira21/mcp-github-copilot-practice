@@ -2,25 +2,25 @@
     "mcp": {
         "inputs": [],
         "servers": {
-            "filesystem": {
-                "command": "npx",
-                "args": [
-                    "-y",
-                    "@modelcontextprotocol/server-filesystem",
-                    "/Users/username/Desktop",
-                    "/Users/username/Downloads"
-                ]
-            },
-            "mcp-server-time": {
-                "command": "uvx",
-                "args": [
-                    "--from",
-                    "mcp-server-time",
-                    "mcp-server-time",
-                    "--local-timezone=Europe/Madrid"
-                ],
-                "env": {}
-            },
+            // "filesystem": {
+            //     "command": "npx",
+            //     "args": [
+            //         "-y",
+            //         "@modelcontextprotocol/server-filesystem",
+            //         "/Users/gis/Desktop",
+            //         "/Users/gis/Downloads"
+            //     ]
+            // },
+            // "mcp-server-time": {
+            //     "command": "uvx",
+            //     "args": [
+            //         "--from",
+            //         "mcp-server-time",
+            //         "mcp-server-time",
+            //         "--local-timezone=Europe/Madrid"
+            //     ],
+            //     "env": {}
+            // },
             "github": {
                 "command": "npx",
                 "args": [
@@ -31,12 +31,40 @@
                     "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
                 }
             },
-            "weather":{
+            "weather": {
                 "command": "node",
                 "args": [
                     "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-weather/build/index.js"
                 ],
                 "env": {}
+            },
+            "google-maps": {
+                "command": "docker",
+                "args": [
+                    "run",
+                    "-i",
+                    "--rm",
+                    "-e",
+                    "GOOGLE_MAPS_API_KEY",
+                    "mcp/google-maps"
+                ],
+                "env": {
+                    "GOOGLE_MAPS_API_KEY": "AIzaSyCHilEwTMv7G3e2jpS-X83zHfWR7YFeHtY"
+                }
+            },
+            "spotify-mcp": {
+                "command": "uv",
+                "args": [
+                    "--directory",
+                    "/Users/gis/Desktop/Dev/spotify-mcp",
+                    "run",
+                    "spotify-mcp"
+                ],
+                "env": {
+                    "SPOTIFY_CLIENT_ID": "8200ad220c964ed6b9ab46ffa4fc85e0",
+                    "SPOTIFY_CLIENT_SECRET": "490b93f2b7a34de9bb1dd1e25f9719a1",
+                    "SPOTIFY_REDIRECT_URI": "http://localhost:8888"
+                }
             }
         }
     },
