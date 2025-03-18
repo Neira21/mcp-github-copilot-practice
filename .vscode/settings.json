@@ -1,0 +1,44 @@
+{
+    "mcp": {
+        "inputs": [],
+        "servers": {
+            "filesystem": {
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-filesystem",
+                    "/Users/username/Desktop",
+                    "/Users/username/Downloads"
+                ]
+            },
+            "mcp-server-time": {
+                "command": "uvx",
+                "args": [
+                    "--from",
+                    "mcp-server-time",
+                    "mcp-server-time",
+                    "--local-timezone=Europe/Madrid"
+                ],
+                "env": {}
+            },
+            "github": {
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-github"
+                ],
+                "env": {
+                    "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
+                }
+            },
+            "weather":{
+                "command": "node",
+                "args": [
+                    "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-weather/build/index.js"
+                ],
+                "env": {}
+            }
+        }
+    },
+    "chat.mcp.discovery.enabled": true
+}
