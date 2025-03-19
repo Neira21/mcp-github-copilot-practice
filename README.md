@@ -30,3 +30,9 @@ Para probar un mcp server puedes hacerlo usando directamente el Chat de Github C
 ```bash
 npx @modelcontextprotocol/inspector
 ```
+
+### Logs Claude Desktop
+
+```bash
+tail -n 20 -F ~/Library/Logs/Claude/mcp*.log
+```
