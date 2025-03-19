@@ -1,0 +1,15 @@
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/python:3.11
+   
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+  
+  remote-mcp:    
+    build:
+      context: ../mcp-remote
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 3001:3001
