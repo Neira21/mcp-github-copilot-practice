@@ -13,36 +13,12 @@ const server = new McpServer({
     version: "1.0.0"
 });
 
-server.resource("echo",
-    new ResourceTemplate("echo://{message}", { list: undefined }),
-    async (uri, { message }) => ({
-        contents: [{
-            uri: uri.href,
-            text: `Resource echo: ${message}`
-        }]
-    })
-);
-
 server.tool(
     "echo",
     "Echo a message",
     { message: z.string() },
     async ({ message }) => ({
         content: [{ type: "text", text: `Tool echo: ${message}` }]
-    })
-);
-
-server.prompt(
-    "echo",
-    { message: z.string() },
-    ({ message }) => ({
-        messages: [{
-            role: "user",
-            content: {
-                type: "text",
-                text: `Please process this message: ${message}`
-            }
-        }]
     })
 );
 
@@ -59,7 +35,8 @@ app.get("/sse", async (req, res) => {
 
 app.post("/message", async (req, res) => {
 
-    console.log("Received message");
+    console.log(`Received POST message:`);
+    console.log(req.body);
 
     await transport.handlePostMessage(req, res);
 });
