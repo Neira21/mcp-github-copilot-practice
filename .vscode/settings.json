@@ -13,7 +13,7 @@
             //         "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-stdio/build/index.js"
             //     ],
             //     "env": {}
-            // },
+            // },        
             "spotify": {
                 "command": "node",
                 "args": [
