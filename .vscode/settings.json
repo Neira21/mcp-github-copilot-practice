@@ -2,25 +2,29 @@
     "mcp": {
         "inputs": [],
         "servers": {
-            // "filesystem": {
-            //     "command": "npx",
-            //     "args": [
-            //         "-y",
-            //         "@modelcontextprotocol/server-filesystem",
-            //         "/Users/gis/Desktop",
-            //         "/Users/gis/Downloads"
-            //     ]
-            // },
-            // "mcp-server-time": {
-            //     "command": "uvx",
-            //     "args": [
-            //         "--from",
-            //         "mcp-server-time",
-            //         "mcp-server-time",
-            //         "--local-timezone=Europe/Madrid"
-            //     ],
-            //     "env": {}
-            // },
+            "remote-mcp": {
+                "type": "sse",
+                "url": "http://localhost:3001/sse",
+            },
+            "filesystem": {
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-filesystem",
+                    "/Users/gis/Desktop",
+                    "/Users/gis/Downloads"
+                ]
+            },
+            "mcp-server-time": {
+                "command": "uvx",
+                "args": [
+                    "--from",
+                    "mcp-server-time",
+                    "mcp-server-time",
+                    "--local-timezone=Europe/Madrid"
+                ],
+                "env": {}
+            },
             "github": {
                 "command": "npx",
                 "args": [
