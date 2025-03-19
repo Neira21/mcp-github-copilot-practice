@@ -2,18 +2,24 @@
     "mcp": {
         "inputs": [],
         "servers": {
-            "remote-mcp": {
-                "type": "sse",
-                "url": "http://localhost:3001/sse",
-            },
-             "stdio-mcp": {
-                "type": "stdio",
+            // "remote-mcp": {
+            //     "type": "sse",
+            //     "url": "http://localhost:3001/sse",
+            // },
+            // "stdio-mcp": {
+            //     "type": "stdio",
+            //     "command": "node",
+            //     "args": [
+            //         "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-stdio/build/index.js"
+            //     ],
+            //     "env": {}
+            // },
+            "spotify": {
                 "command": "node",
                 "args": [
-                    "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-stdio/build/index.js"
-                ],
-                "env": {}
-            },
+                    "/Users/gis/Desktop/Dev/spotify-mcp-server/build/index.js"
+                ]
+            }
             // "filesystem": {
             //     "command": "npx",
             //     "args": [
