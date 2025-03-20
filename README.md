@@ -9,18 +9,9 @@ Model Context Protocol (MCP) es un protocolo que permite a los modelos de lengua
 
 ## MCP servers de ejemplo
 
-Como parte de este repo he añadido la configuración que necesita Github Copilot Chat - Edits (agent Mode) para ejecutar varios servidores.
+En este repositorio he dejado dos ejemplos de servidores MCP que puedes usar para probar tanto el transporte stdio como sse. Estos servidores son muy simples y están creados en Node.js con Typescript. 
 
 
-# preguntas para el mcp server de mcp-server-time
-
-- `qué hora es en Madrid`
-
-
-# preguntas para el mcp server de GitHub
-
-- `qué issues tengo en returngis/dragons-api`
-- `qué pull request tengo en returngis/dragons-api`
 
 
 ## Ejecutar MCP Inspector

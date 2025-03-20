@@ -5,15 +5,13 @@ import { google } from "googleapis";
 import { z } from "zod";
 import { tool } from "./types.js";
 
-console.log(`API KEY: ${process.env.YOUTUBE_API_KEY}`);
-
 const youtube = google.youtube({
     version: "v3",
     auth: process.env.YOUTUBE_API_KEY,
 });
 
 
-export const searchVideo: tool<{
+const searchVideo: tool<{
     q: z.ZodOptional<z.ZodString>;
 }> = {
     name: "searchVideo",
@@ -66,5 +64,5 @@ export const searchVideo: tool<{
 };
 
 export const searchTools = [
-    searchVideo
+    searchVideo // Search for a video on YouTube
 ];
