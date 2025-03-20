@@ -12,7 +12,9 @@
                 "args": [
                     "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-stdio/build/index.js"
                 ],
-                "env": {}
+                "env": {
+                    "YOUTUBE_API_KEY": "AIzaSyDyn_T0J74CE0hYJWXa2DpPqs2uzEyf3bs",
+                }
             },        
             // "spotify": {
             //     "command": "node",

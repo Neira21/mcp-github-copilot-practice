@@ -1,21 +1,24 @@
 {
-  "name": "mcp-weather",
+  "name": "mcp-stio-server",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc && chmod 755 build/index.js"
+    "build": "tsc && cp .env  build/.env &&  chmod 755 build/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gisela Torres",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.7.0",
-    "zod": "^3.24.2"
+    "dotenv": "^16.4.7",
+    "googleapis": "^146.0.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/node": "^22.13.10",
+    "shx": "^0.3.4",
     "typescript": "^5.8.2"
   },
   "files": [

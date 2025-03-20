@@ -1,145 +1,98 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-
-const NWS_API_BASE = "https://api.weather.gov";
-
-const USER_AGENT = "weather-app/1.0"
-
-interface AlertFeature {
-    properties: {
-        event?: string;
-        areaDesc?: string;
-        severity?: string;
-        status?: string;
-        headline?: string;
-    };
-}
-
-interface ForecastPeriod {
-    name?: string;
-    temperature?: number;
-    temperatureUnit?: string;
-    windSpeed?: string;
-    windDirection?: string;
-    shortForecast?: string;
-}
-
-interface AlertsResponse {
-    features: AlertFeature[];
-}
-
-interface PointsResponse {
-    properties: {
-        forecast?: string;
-    };
-}
-
-interface ForecastResponse {
-    properties: {
-        periods: ForecastPeriod[];
-    };
-}
-
-
-// Helper function for making NWS API requests
-async function makeNWSRequest<T>(url: string): Promise<T | null> {
-    const headers = {
-        "User-Agent": USER_AGENT,
-        Accept: "application/geo+json",
-    };
-
-    try {
-        const response = await fetch(url, { headers });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return (await response.json()) as T;
-    } catch (error) {
-        console.error("Error making NWS request:", error);
-        return null;
-    }
-}
-
-
-// Format alert data
-function formatAlert(feature: AlertFeature): string {
-    const props = feature.properties;
-    return [
-        `Event: ${props.event || "Unknown"}`,
-        `Area: ${props.areaDesc || "Unknown"}`,
-        `Severity: ${props.severity || "Unknown"}`,
-        `Status: ${props.status || "Unknown"}`,
-        `Headline: ${props.headline || "No headline"}`,
-        "---",
-    ].join("\n");
-}
-
+import { google } from "googleapis";
 
 // Create a server instance
 const server = new McpServer({
-    name: "weather",
+    name: "mcp-stdio-server",
     version: "1.0.0"
 });
 
+console.log(`Youtube API Key: ${process.env.YOUTUBE_API_KEY}`);
+    
+    
+    // Load the Google APIs client library
+const youtube = google.youtube({
+    version: "v3",
+    auth: process.env.YOUTUBE_API_KEY,
+});
+
+
 
 // Tools
+// https://modelcontextprotocol.io/docs/concepts/tools#tool-definition-structure
+
 server.tool(
-    "get-alerts",
-    "Get weather alerts for a state",
+    // Name of the tool (used to call it)
+    "get-youtube-channel",
+    // Description of the tool (what it does)
+    "Get YouTube Channel",
+    // Schema for the tool (input validation)
     {
-        state: z.string().length(2).describe("Two-letter state code (e.g. CA, NY)"),
+        query: z.string().min(1).max(100),
     },
-    async ({ state }) => {
+    // Handler for the tool (function to be executed when the tool is called)
+    async ({ query }) => {
 
-        const stateCode = state.toUpperCase();
-        const alertsUrl = `${NWS_API_BASE}/alerts?area=${stateCode}`;
-        const alertsData = await makeNWSRequest<AlertsResponse>(alertsUrl);
 
-        if (!alertsData) {
-            return {
-                content: [
-                    {
-                        type: "text",
-                        text: "Failed to retrieve alerts data",
-                    },
-                ],
-            };
-        }
+        // Call the youtube API for seach channels
+        const res = await youtube.channels.list({
+            part: ['snippet'],
+            forHandle: query,
+            maxResults: 5,
 
-        const features = alertsData.features || [];
-        if (features.length === 0) {
-            return {
-                content: [
-                    {
-                        type: "text",
-                        text: `No active alerts for ${stateCode}`,
-                    },
-                ],
-            };
-        }
+        }, {});
 
-        const formattedAlerts = features.map(formatAlert);
-        const alertsText = `Active alerts for ${stateCode}:\n\n${formattedAlerts.join("\n")}`;
+
+        // Log the results to the console
+        console.table(
+            res.data.items?.map((item) => ({
+                Title: item.snippet?.title,
+                Description: item.snippet?.description,
+                Thumbnail: item.snippet?.thumbnails?.default?.url,
+                Language: item.snippet?.defaultLanguage,
+                Country: item.snippet?.country,
+                PublishedAt: item.snippet?.publishedAt,
+            })));
+
+        // Return the results to the client
+        let formattedResults = "";
+        res.data.items?.forEach((item) => {
+            formattedResults += `\n\n**Title:** ${item.snippet?.title}\n\n`;
+            formattedResults += `**Description:** ${item.snippet?.description}\n\n`;
+            formattedResults += `**Thumbnail:** ![Thumbnail](${item.snippet?.thumbnails?.default?.url})\n\n`;
+            formattedResults += `**Published At:** ${item.snippet?.publishedAt}\n\n`;
+            formattedResults += `**URL:** http://youtube.com/${item.snippet?.customUrl}\n\n`;
+        });
 
         return {
             content: [
                 {
                     type: "text",
-                    text: alertsText,
+                    text: formattedResults.length > 0
+                        ? `# Search results for "${query}"\n\n${formattedResults}`
+                        : `No results found for "${query}"`,
                 },
             ],
         };
     },);
 
 async function main() {
+
     // Start the server with Stdio transport
     const transport = new StdioServerTransport();
+    // Connect the server to the transport
     await server.connect(transport);
-    console.error("Weather MCP Server running on stdio");
+
+    console.error("This MCP Server is running on stdio 🖥️");
 }
 
 main().catch((error) => {
-    console.error("Fatal error in main():", error);
+
+    console.error("👎🏻 Fatal error in main():", error);
     process.exit(1);
+
 });

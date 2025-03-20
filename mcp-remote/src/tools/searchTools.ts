@@ -32,17 +32,19 @@ const searchVideo: tool<{
             order: 'relevance',
         }, {});
 
-        res.data.items?.forEach((item) => {
-            console.log(item.snippet?.title);
-            console.log(item.snippet?.description);
-            console.log(item.snippet?.thumbnails?.default?.url);
-            console.log(item.snippet?.channelTitle);
-            console.log(item.snippet?.publishedAt);
-        });
+        console.table(
+            res.data.items?.map((item) => ({
+            Title: item.snippet?.title,
+            Description: item.snippet?.description,
+            Thumbnail: item.snippet?.thumbnails?.default?.url,
+            Channel: item.snippet?.channelTitle,
+            PublishedAt: item.snippet?.publishedAt,
+            }))
+        );
 
         let formattedResults = "";
         res.data.items?.forEach((item) => {
-            formattedResults += `\n\n**Title:** ${item.snippet?.title}\n\n`;
+            formattedResults += `\n\n**Title:** ${item.snippet?.title}\n\n`;            
             formattedResults += `**Description:** ${item.snippet?.description}\n\n`;
             formattedResults += `**Thumbnail:** ![Thumbnail](${item.snippet?.thumbnails?.default?.url})\n\n`;
             formattedResults += `**Channel:** ${item.snippet?.channelTitle}\n\n`;
