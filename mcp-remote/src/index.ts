@@ -1,8 +1,12 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import express from "express";
-import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
-import { z } from "zod";
+import { searchTools } from "./tools/searchTools.js";
 
+
+console.log(`API KEY: ${process.env.YOUTUBE_API_KEY}`);
 
 const PORT = process.env.PORT || 3001;
 let transport: SSEServerTransport;
@@ -13,14 +17,20 @@ const server = new McpServer({
     version: "1.0.0"
 });
 
-server.tool(
-    "echo",
-    "Echo a message",
-    { message: z.string() },
-    async ({ message }) => ({
-        content: [{ type: "text", text: `Tool echo: ${message}` }]
-    })
-);
+
+[...searchTools].forEach((tool) => {
+    server.tool(tool.name, tool.description, tool.schema, tool.handler);
+});
+
+
+// server.tool(
+//     "echo",
+//     "Echo a message",
+//     { message: z.string() },
+//     async ({ message }) => ({
+//         content: [{ type: "text", text: `Tool echo: ${message}` }]
+//     })
+// );
 
 const app = express();
 
