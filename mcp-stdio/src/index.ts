@@ -11,10 +11,9 @@ const server = new McpServer({
     version: "1.0.0"
 });
 
-console.log(`Youtube API Key: ${process.env.YOUTUBE_API_KEY}`);
+  
     
-    
-    // Load the Google APIs client library
+// Load the Google APIs client library
 const youtube = google.youtube({
     version: "v3",
     auth: process.env.YOUTUBE_API_KEY,

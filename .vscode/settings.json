@@ -5,6 +5,9 @@
             "remote-mcp": {
                 "type": "sse",
                 "url": "http://localhost:3001/sse",
+                "env": {
+                    "YOUTUBE_API_KEY": "<YOUTUBE_API_KEY>"
+                }
             },
             "stdio-mcp": {
                 "type": "stdio",
@@ -13,9 +16,9 @@
                     "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-stdio/build/index.js"
                 ],
                 "env": {
-                    "YOUTUBE_API_KEY": "AIzaSyDyn_T0J74CE0hYJWXa2DpPqs2uzEyf3bs",
+                    "YOUTUBE_API_KEY": "<YOUTUBE_API_KEY>",
                 }
-            },        
+            },
             // "spotify": {
             //     "command": "node",
             //     "args": [
