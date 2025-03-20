@@ -11,7 +11,8 @@ Model Context Protocol (MCP) es un protocolo que permite a los modelos de lengua
 
 En este repositorio he dejado dos ejemplos de servidores MCP que puedes usar para probar tanto el transporte stdio como sse. Estos servidores son muy simples y están creados en Node.js con Typescript. 
 
-
+- `mcp-stdio`: Este servidor implementa el transporte stdio y permite interactuar con el modelo de lenguaje a través de la entrada y salida estándar. Puedes usarlo para probar el protocolo MCP en un entorno local.
+- `mcp-remote`: Este servidor implementa el transporte sse y permite interactuar con el modelo de lenguaje a través de eventos del servidor. Puedes usarlo para probar el protocolo MCP en un entorno local.
 
 
 ## Ejecutar MCP Inspector
