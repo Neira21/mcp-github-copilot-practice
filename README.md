@@ -2,7 +2,7 @@
 
 ¡Hola developer 👋🏻! En este repo encontrarás las demos que te mostré durante mi vídeo [Cómo crear MCP Servers y usarlos con GitHub Copilot Chat 🚀💻🤖](https://youtu.be/khz4nWR9l20) que puedes encontrar en mi canal de YouTube.
 
-
+![MCP Servers y GitHub Copilot Chat](images/Cómo%20crear%20MCP%20Servers%20y%20usarlos%20con%20GitHub%20Copilot%20Chat.png)
 
 ## ¿Qué es Model Context Protocol 🤔?
 
