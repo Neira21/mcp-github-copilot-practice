@@ -9,13 +9,10 @@
             }
         ],
         "servers": {
-            // "remote-mcp": {
-            //     "type": "sse",
-            //     "url": "http://localhost:3001/sse",
-            //     "env": {
-            //         "YOUTUBE_API_KEY": "${input:youtube_api_key}"
-            //     }
-            // },
+            "remote-mcp": {
+                "type": "sse",
+                "url": "http://localhost:3001/sse"               
+            },
             "stdio-mcp": {
                 "type": "stdio",
                 "command": "node",
