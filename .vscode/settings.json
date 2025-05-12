@@ -1,22 +1,29 @@
 {
     "mcp": {
-        "inputs": [],
+        "inputs": [
+            {
+                "type": "promptString",
+                "id": "youtube_api_key",
+                "description": "YouTube API Key",
+                "password": true
+            }
+        ],
         "servers": {
-            "remote-mcp": {
-                "type": "sse",
-                "url": "http://localhost:3001/sse",
-                "env": {
-                    "YOUTUBE_API_KEY": "<YOUTUBE_API_KEY>"
-                }
-            },
+            // "remote-mcp": {
+            //     "type": "sse",
+            //     "url": "http://localhost:3001/sse",
+            //     "env": {
+            //         "YOUTUBE_API_KEY": "${input:youtube_api_key}"
+            //     }
+            // },
             "stdio-mcp": {
                 "type": "stdio",
                 "command": "node",
                 "args": [
-                    "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-stdio/build/index.js"
+                    "D:\\repos\\mcp-github-copilot\\mcp-stdio\\build\\index.js"
                 ],
                 "env": {
-                    "YOUTUBE_API_KEY": "<YOUTUBE_API_KEY>",
+                    "YOUTUBE_API_KEY": "${input:youtube_api_key}"
                 }
             },
             // "spotify": {
