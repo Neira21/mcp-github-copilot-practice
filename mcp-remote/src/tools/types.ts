@@ -1,4 +1,3 @@
-import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol.js";
 import { z } from "zod";
 
 export type tool<Args extends z.ZodRawShape> = {
@@ -6,8 +5,7 @@ export type tool<Args extends z.ZodRawShape> = {
   description: string;
   schema: Args;
   handler: (
-    args: z.infer<z.ZodObject<Args>>,
-    extra: RequestHandlerExtra
+    args: z.infer<z.ZodObject<Args>>,    
   ) =>
     | Promise<{
         content: Array<{

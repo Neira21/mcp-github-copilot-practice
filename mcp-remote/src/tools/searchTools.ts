@@ -1,6 +1,5 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol.js";
 import { google } from "googleapis";
 import { z } from "zod";
 import { tool } from "./types.js";
@@ -14,7 +13,7 @@ const youtube = google.youtube({
 const searchVideo: tool<{
     q: z.ZodOptional<z.ZodString>;
 }> = {
-    name: "searchVideo",
+    name: "search_video",
     description: "Search for a video on YouTube",
     schema: {
         q: z
@@ -22,7 +21,7 @@ const searchVideo: tool<{
             .optional()
             .describe("The search query for the video"),
     },
-    handler: async ({ q }, extra: RequestHandlerExtra) => {
+    handler: async ({ q }) => {
 
         const res = await youtube.search.list({
             part: ['snippet'],
