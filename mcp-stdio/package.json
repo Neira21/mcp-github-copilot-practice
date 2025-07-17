@@ -1,20 +1,19 @@
 {
-  "name": "mcp-stio-server",
+  "name": "mcp-stdio-server",
   "version": "1.0.0",
+  "author": "Gisela Torres",
+  "license": "ISC",
+  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "tsc &&  chmod 755 build/index.js"
   },
   "keywords": [],
-  "author": "Gisela Torres",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.15.0",
     "dotenv": "^17.2.0",
-    "googleapis": "^150.0.1",
-    "zod": "^4.0.2"
+    "googleapis": "^153.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
