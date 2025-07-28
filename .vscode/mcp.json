@@ -1,32 +1,20 @@
 {
-    "servers": {
-        "remote-mcp": {
-            "type": "sse",
-            "url": "http://localhost:3001/sse"
-        },
-        "stdio-mcp": {
-            "type": "stdio",
-            "command": "node",
-            "args": [
-                "/Users/gis/Desktop/Dev/mcp-github-copilot/mcp-stdio/build/index.js"
-            ],
-            "env": {
-                "YOUTUBE_API_KEY": "${input:youtube_api_key}"
-            },
-            "dev": {
-                "watch": "mcp-stdio/**/*.ts",
-                "debug": {
-                    "type": "node"
-                }
-            }
-        }
-    },
-    "inputs": [
-        {
-            "type": "promptString",
-            "id": "youtube_api_key",
-            "description": "YouTube API Key",
-            "password": true
-        }
-    ]
+	"servers": {
+		"stdio-mcp": {
+			"type": "stdio",
+			"command": "node",
+			"args": [
+				"c:\\Users\\Alvaro\\Desktop\\mcp-github-copilot-practice\\mcp-stdio\\build\\index.js"
+			],
+			"env": {
+				"YOUTUBE_API_KEY": ""
+			},
+			"dev": {
+				"watch": "mcp-stdio/**/*.ts",
+				"debug": {
+					"type": "node"
+				}
+			}
+		}
+	}
 }

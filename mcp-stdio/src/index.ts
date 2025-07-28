@@ -21,9 +21,7 @@ const youtube = google.youtube({
 // https://modelcontextprotocol.io/docs/concepts/tools#tool-definition-structure
 
 server.registerTool(
-  // Name of the tool (used to call it)
   "get_youtube_channel",
-  // Schema para la herramienta (input validation)
   {
     title: "Get YouTube Channel",
     description: "Search for a YouTube channel by its name.",
